@@ -20,3 +20,5 @@ Here are some preview images
 ![Opfor_Analysis](https://github.com/user-attachments/assets/61a4cc68-2a97-4d8c-a4c6-1cd9a46e5047)
 
 ![Pilot_Profiles](https://github.com/user-attachments/assets/b05a158a-b05b-4e4b-9d7d-a781cb136e86)
+
+Normal disclaimer - the characters of Rio, Nilan Bannerjee, Captain Farris, Alex Kim and any other mentions of characters and locations from the Massif Press supplement "Operation Solstice Rain" are not mine. Don't try and sell this. Additionally, feel free to use any of my original content/characters in your games, but I'd very much appreciate if you didn't sell that content either. All of the images are AI generated in some fashion (with some manual edits) so feel free to chuck anything that you find objectionable and replace it with actual art. 
