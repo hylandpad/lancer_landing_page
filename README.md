@@ -9,6 +9,8 @@ All of the animations are CSS and vanilla JS.
 
 A version 2 of this is planned with some improvements to the data structure for pilots to centralize all of the stuff between the two squads.
 
+Probably also improve the redacted sections and make them fancier style tooltips.
+
 Here are some preview images
 
 ![Assets_Intel](https://github.com/user-attachments/assets/1bfc6a31-9099-4a6b-8231-8b3abcea9f74)
