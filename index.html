@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Briefing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Monospace&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+
+<body class="min-h-screen bg-gray-900 text-teal-400 font-mono">
+
+    <div id="loading-overlay" class="z-50">
+        <p id="loading-text-initializing">INITIALIZING...</p>
+        <p id="loading-text-lancer" style="display:none;">Welcome back, Lancer</p>
+        <div id="loading-logo"></div>
+        <p id="loading-text-verifying">Union Navy Confidential - Verifying Access...</p>
+        <p id="loading-text-authorized">ACCESS GRANTED</p>
+    </div>
+
+    <header id="mission-header" class="z-49">
+        <div id="logo" onclick="scrollToTop()"></div>
+        <h1
+            class="bg-gradient-to-r from-teal-400 to-emerald-400 text-transparent bg-clip-text drop-shadow-lg text-left">
+            OPERATION: BLACK TIDE BREAKER
+        </h1>
+        <div id="menu-options" class="text-right text-teal-50">
+            <span id="nav-prospectus" onclick="showHideSections('nav-prospectus')"><img src="/images/reaction.svg" class="nav-icon"><span class="slide-out-span nav-text">PROSPECTUS</span></span>
+            <span id="nav-log" onclick="showHideSections('nav-log')"><img src="/images/orbital.svg" class="nav-icon"><span class="slide-out-span nav-text">MISSION
+                    LOG</span></span>
+            <span id="nav-pilots" onclick="showHideSections('nav-pilots')"><img src="/images/pilot.svg" class="nav-icon"><span class="slide-out-span nav-text">PILOT
+                    PROFILES</span></span>
+            <span id="nav-opfor" onclick="showHideSections('nav-opfor')"><img src="/images/encounter.svg" class="nav-icon"><span class="slide-out-span nav-text">OPFOR
+                    ANALYSIS</span></span>
+            <span id="nav-assets" onclick="showHideSections('nav-assets')"><img src="/images/reserve_tac.svg" class="nav-icon"><span
+                    class="slide-out-span nav-text">INTEL & ASSETS</span></span>
+        </div>
+    </header>
+
+    <div id="page-tooltip" class="z-49"></div>
+    <div class="z-48 main-body">
+        <main id="main-loader" class="flex flex-wrap gap-6 w-full max-w-6xl mx-auto"
+            style="position: relative;margin-top: 8rem;visibility: visible;">
+            <section class="hidden md:block md:w-[calc(18%-0.75rem)] lg:w-[calc(18%-0.75rem)]">
+                <img src="./images/union_white.svg" class="">
+            </section>
+            <section class="hidden md:block md:w-[calc(70%-0.75rem)] lg:w-[calc(70%-0.75rem)]">
+                <div id="code-display"
+                    class="text-2xl sm:text-2xl font-semibold  border-teal-600 pb-2 mb-3 text-emerald-300"
+                    style="visibility: visible;">
+                    <h3>CENTCOM PROTOCOL MANAGER v.37899-AlphaV</h3>
+                    <div class="code-line-container">
+                        <span class="text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">Channel-1
+                            Processor:</span>
+                        <span id="code-text-1"
+                            class="code-text-line text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">++//Pars</span>
+                        <div id="progress-bar-1" class="progress-bar-instance" style="width: 0%;"></div>
+                    </div>
+                    <div class="code-line-container">
+                        <span class="text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">Channel-2
+                            Processor:</span>
+                        <span id="code-text-2"
+                            class="code-text-line text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">+</span>
+                        <div id="progress-bar-2" class="progress-bar-instance" style="width: 0%;"></div>
+                    </div>
+                    <div class="code-line-container">
+                        <span class="text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">Channel-3
+                            Processor:</span>
+                        <span id="code-text-3"
+                            class="code-text-line text-teal-400 text-sm font-mono whitespace-nowrap overflow-hidden">++//Generating
+                            Probabilistic Trajectory...</span>
+                        <div id="progress-bar-3" class="progress-bar-instance" style="width: 64.3416%;"></div>
+                    </div>
+                </div>
+                <div id="exclamation" class="flex justify-end items-center max-w-4xl mx-auto mb-4">
+                    <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>
+                    <p class="text-yellow-400 text-xs sm:text-sm">OPERATIONAL DATA LOADED FROM MOST RECENT ITERATION OF THALASSA
+                        CLASS SHIPBOARD NHP (ENTITY:RIO).</p>
+                </div>
+            </section>
+        </main>
+        <main id="main-prospectus" class="flex flex-wrap gap-6 justify-center w-full max-w-7xl mb-6 mx-auto">
+            <section class="w-full max-w-7xl mx-auto mb-6 briefing-section border-solid border-2 border-emerald-300">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-info-circle mr-2"></i>Introduction
+                </h2>
+                <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
+                    It is six months since the conclusion of <span class="tooltip-trigger"
+                        data-tooltip-text="A previous Union operation in the Cressidium system, focused on the rescue of Captain Amanda Farris and Nilan Bannerjee after a surprise attack by the Vestan Sovereignty on the LSA capital city of Nov Elysia.">Operation
+                        Solstice Rain</span>. Captain <span class="tooltip-trigger"
+                        data-tooltip-text="CO of the UNS-CV Rio Grande">Amanda Farris</span> has been rescued, and the
+                    Vestan Sovereignty Armed Forces (<span class="tooltip-trigger"
+                        data-tooltip-text="The primary military power of the former Vestan Sovereignty.">VSAF</span>)
+                    have
+                    been ejected from Nov Elysia, temporarily stalling the Vestan takeover of Cressidium. With the <span
+                        class="tooltip-trigger"
+                        data-tooltip-text="Union Naval Ship - Corvette class, currently serving as the command vessel for Union operations on Cressidium.">UNS-CV
+                        Rio Grande</span> in orbit and Captain Farris reinstated, <span class="tooltip-trigger"
+                        data-tooltip-text="The central military command structure of the Union.">Union Naval
+                        Command</span>
+                    has authorized limited engagement of Union Armed Forces in a true combat capacity. Our objective is
+                    to
+                    aid the <span class="tooltip-trigger"
+                        data-tooltip-text="Leandric States Alliance: A coalition of independent states on Cressidium, currently allied with Union.">LSA</span>
+                    against the newly emergent threat of the <span class="tooltip-trigger"
+                        data-tooltip-text="New Vestan Revolutionary Guard: A military junta that overthrew the Vestan Royal family and siezed control of the government.">NVRG</span>,
+                    which has been launching terror raids into LSA and <span class="tooltip-trigger"
+                        data-tooltip-text="Republic of Okasnia: A historically mercantile republic on the southern fringes of Vesta that spans across an archipelago. Historically a neutral power.">Okasnian</span>
+                    territories ever since their hostile takeover of the Vestan Military Command.
+                </p>
+            </section>
+            <section class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section border-solid border-2 border-emerald-300">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-bullseye mr-2"></i>Situation
+                </h2>
+                <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
+                    The NVRG coup, orchestrated by cloneborne <span class="tooltip-trigger"
+                        data-tooltip-text="A historical political faction within Union known for its human-supremacist and militaristic ideologies.">Anthrochauvinist</span>
+                    SecCom officers and their proteges, has destabilized the Vestian Sovereignty, Cressidium's largest
+                    nation-state. This has caused economic decline in the Republic of Okasnia and similarly affected the
+                    LSA. The UNS-CV Rio Grande, under Captain Farris and <span class="tooltip-trigger"
+                        data-tooltip-text="XO of the Rio Grande, trusted second in command to Captain Farris">Alex
+                        Kim,</span> is mediating between the LSA and the few remaining Loyalist Vestan Armed Forces
+                    (<span class="tooltip-trigger"
+                        data-tooltip-text="Guerilla elements of the former VSAF that continued to combat NVRG coup orchestrators after the fall of the Sovereignty and the Royal Family.">LVAF</span>),
+                    pitting them against the NVRG. <br /><br />While small, the LVAF are well-trained and, alongside two
+                    <span class="tooltip-trigger"
+                        data-tooltip-text="Elite mechanized infantry units of the Union military.">Union Lancer</span>
+                    detachments, represent the only mechanized forces capable of expeditionary action into Okasnia and
+                    Vesta. The NVRG, though a fraction of the former VSAF, remains superior to combined LSA and Okasnian
+                    forces. Complicating matters, the NVRG has contracted well-equipped mercenary companies, some with
+                    <span class="tooltip-trigger"
+                        data-tooltip-text="High quality technology manufactured within Union or by Union subsidiaries.">Union-spec
+                        technology</span>, who should be considered extremely dangerous. <span class="tooltip-trigger"
+                        data-tooltip-text="General Massive Systems: One of the 'Big Four' corpro-states, known for reliable and widespread GMS-brand equipment and printers.">GMS</span>
+                    support is arriving slowly, with Central Command hesitant to allocate more resources without a
+                    higher threat level.
+                </p>
+                <!--<div class="mt-4">
+                    <img
+                        src="/images/cressidium_map.png" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/9CA3AF?text=Map+Unavailable';"
+                        alt="Situation Map - Cressidium Political Landscape"
+                        class="w-full rounded-lg border border-teal-700 shadow-lg"
+                    />
+                </div>-->
+            </section>
+            <section class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section border-solid border-2 border-emerald-300">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-tasks mr-2"></i>Campaign Objectives
+                </h2>
+                <ul class="list-disc list-inside space-y-2 text-base sm:text-lg text-gray-300">
+                    <li><span class="font-semibold text-teal-300">Primary:</span> Capture, if possible, ranking
+                        members of the New Vestan Revolutionary Guard (NVRG) for Union interrogation.</li>
+                    <li><span class="font-semibold text-teal-300">Primary:</span> Verify the status of Ambassador Nilan
+                        Bannerjee. If alive, arrange a priority rescue.</li>
+                    <li><span class="font-semibold text-teal-300">Secondary:</span> Neutralize the NVRG high command
+                        structure.</li>
+                    <li><span class="font-semibold text-teal-300">Tertiary:</span> Enact the dispersion of local Vestan
+                        Warlords and entrenched mercenary commanders. Pursue peaceful dispersion first; apply military
+                        force at Lancer team discretion if necessary.</li>
+                    <li><span class="font-semibold text-teal-300">Strategic Goal:</span> Stabilize the territory of the
+                        former Vestan Sovereignty to facilitate a Union diplomatic mission aimed at establishing
+                        egalitarian civil structures and lasting planetary peace, furthering Cressidium's path to <span
+                            class="tooltip-trigger"
+                            data-tooltip-text="A status granted by Union to planets that meet specific criteria for stability, development, and integration, offering significant benefits.">Core-world
+                            status</span>.</li>
+                </ul>
+            </section>
+        </main>
+        <main id="main-log" class="flex flex-wrap w-full max-w-7xl briefing-section mx-auto mb-6 hidden border-solid border-2 border-emerald-300">
+            <h2
+                class="w-full mx-auto text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                <i class="fa-solid fa-route mr-2"></i>Mission Log
+            </h2>
+            <section class="w-full md:w-[calc(33%-0.75rem)] briefing-section mx-auto mb-6 border-solid border-2 border-emerald-300">
+                <h3 class="text-xl"><i class="fa-solid fa-list-ol"></i>
+                    Mission List</h3>
+                <ol class="pt-4 list-inside">
+                    <li>
+                        <span class="text-slate-400">M1//</span><span class="text-lg">THE DROP:: <span
+                                class="text-green-600">COMPLETE</span></span>
+                        <p class="text-sm text-slate-400">Location: Nov Elysia City Center; Leandria</p>
+                        <p class="text-sm text-slate-400">OpFor Profile: VSAF Expeditionary Force</p>
+                    </li>
+                    <li>
+                        <span class="text-slate-400">M2//</span><span class="text-lg">DAYBREAK:: <span
+                                class="text-green-600">COMPLETE</span></span>
+                        <p class="text-sm text-slate-400">Location: Nov Elysia City Center; Leandria</p>
+                        <p class="text-sm text-slate-400">OpFor Profile: VSAF "Furies" Special Command</p>
+                    </li>
+                    <li>
+                        <span class="text-slate-400">M3//</span><span class="text-lg">FIREFLIGHT:: <span
+                                class="text-green-400 pulsating-text">EMBARKING</span></span>
+                        <p class="text-sm text-slate-400">Location: Res Ustar; Upper Okasnian Archipelago</p>
+                        <p class="text-sm text-slate-400">OpFor Profile: NVRG Raiding Party</p>
+                    </li>
+                </ol>
+            </section>
+            <section class="w-full md:w-[calc(66%-0.75rem)] briefing-section mx-auto mb-6 border-dashed border-2 border-emerald-300">
+                <h3 class="text-xl"><i class="fa-regular fa-folder-open"></i>
+                    Current Mission Parameters &amp; Docket</h3>
+                <p class="pb-6 px-4 pt-4">Operation Black Tide Breaker represents the first incursion of Union
+                    forces into Vesta, with Mission Codename Fireflight laying the groundwork for a beachhead in
+                    northern Okasnia, which is occupied currently by Revolutionary Guard forces. From their
+                    fortified position on the island of Indalore, the NVRG have launched non-stop terror
+                    campaigns against the Okasnians, aimed at keeping their naval and air forces occupied and
+                    unable to strike into the more vulnerable positions of the Vestan mainland.</p>
+                <p class="pb-6 px-4">With the LSAA still recoiling from the devastation of Nov Elysia, the
+                    Leandric states have thus far been unable to provide relief for the Okasnians, a nominal
+                    trading partner and former Sovereignty tributary. When the Sovereignty fell after the
+                    failure to capture the LSA high command, the Okasnians broke off and were met with swift
+                    retribution by the newly formed NVRG. The attacks into the archipelago have not stopped,
+                    with the superior NVRG raiding forces harrying and chipping away at the outdated Okasnian
+                    militia and regular forces.</p>
+            </section>
+
+            <section class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section mx-auto mb-6">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-user-secret mr-2"></i>Dossier
+                </h2>
+                <div class="mt-4">
+                    <div class="hologram-frame w-100%"
+                        style="background: url(./images/Vale.png); background-position: center; background-size: cover; background-repeat: no-repeat; height:450px;">
+                        <p class="p-4 text-neutral-50 backdrop-blur-sm">Uplink to Valedictorian successful// Loading
+                            Intelligence Dossier...</p>
+                    </div>
+                </div>
+                <p class="text-base sm:text-lg text-gray-300 mt-4 leading-relaxed">
+                <p><b>Historical Context</b></p>
+                Union Naval Intelligence Officer <span class="tooltip-trigger"
+                    data-tooltip-text="Key intelligence operative aboard the UNS-CV Rio Grande providing critical information on NVRG activities.">Mayra
+                    Strong's</span> intel reveals NVRG commanders are generational prodigies of Anthrochauvinist
+                SecCom
+                officers who fled Union Space over two hundred years ago, after the fall of the Second Committee.
+                Intelligence reveals that at least a few of their number are generational, vat-grown clones of known
+                SecCom war-criminals, with at least one being identified as a lead orchestrator of the <span
+                    class="tooltip-trigger"
+                    data-tooltip-text="A covert operation on the planet Hercynia, which underwent a systematic total biome kill event under the orders of the Union Second Committee, prompting outrage and resulting in the eventual ousting of the Second Committee and establishment of ThirdCom">Hercynian
+                    Crisis</span>.<br /><br /> Their invasion plans were expedited by the arrival of <span
+                    class="tooltip-trigger"
+                    data-tooltip-text="Interplanetary Shipping - Northstar: One of the 'Big Four' corpro-states, specializing in interstellar logistics and transport.">IPS-N</span>,
+                GMS, and Union presence in the Cressidium system, creating conflict between the old Anthrochauvanist
+                guard and the former Vestan Royal Family and their progressive VSAF elements.<br /> <br />
+                <p><b>The Current Ground Situation</b></p>The UNS-CV Rio Grande intercepted several mercenary
+                companies,
+                but others successfully landed and are under NVRG contract; these units possess Union-specification
+                technology, training, and cybernetics, rendering them highly dangerous. Among them are <span
+                    class="tooltip-trigger"
+                    data-tooltip-text="A small but elite mercenrary company that has historically been funded by anti-Union actors">The
+                    Bad Suns</span> and <span class="tooltip-trigger"
+                    data-tooltip-text="A relatively new arrival to the mercenary stage, this company is already one of the largest operating on the Cascade Line">Rogue
+                    Planet</span> free companies. Force composition reports are still being tabulated.<br /><br />
+                <p><b>Retrieval of Critical Personnel</b></p>
+                Ambassador Nilan Bannerjee, a high-ranking Union diplomat, was not rescued during Operation Solstice
+                Rain. Their considerable diplomatic skills and familiarity with Cressidium's cultures make them
+                potentially instrumental in future peace negotiations if they are recovered alive. <span
+                    class="redacted max-h-[65px] md:max-h-[30px]"><b>REDACTED PENDING REVIEW:</b> There are no
+                    credible
+                    leads currently as to their
+                    whereabouts, though it is believed they have been moved to a secure facility in either Vestan
+                    occupied Okasnia or is being held in a Vestan political prisoner camp further inland.</span>
+                Additional research into their location will need to be performed before any retrieval action can be
+                taken.<br /><br />
+                <p><b>The Missing Vestan Royals</b></p>
+                It is currently unknown whether or not the royal family has been completely culled by the NVRG new
+                command or if they have been moved or imprisoned. If the Royal Family still exists, they may be a
+                useful
+                political alternative to the NVRG, who are seen in the outskirts of the old Sovereignty as
+                oppressive
+                and draconian. Further intelligence will need to be gathered to determine the viability of this
+                effort.
+                </p>
+            </section>
+
+            <section class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section mb-6">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-cogs mr-2"></i>Operational Parameters
+                </h2>
+                <ul class="list-disc list-inside space-y-2 text-base sm:text-lg text-gray-300">
+                    <li><span class="font-semibold text-teal-300">Operating Authority:</span> Union Naval Command,
+                        via
+                        UNS-CV Rio Grande.</li>
+                    <li><span class="font-semibold text-teal-300">Force Composition:</span> UNS-CV Rio Grande
+                        assets,
+                        two (2) Union Lancer detachments (designation Juarez Blue and Atlas Silver), allied Loyalist
+                        Vestan Armed Forces (LVAF).</li>
+                    <li><span class="font-semibold text-teal-300">Threat Profile:</span> New Vestan Revolutionary
+                        Guard
+                        (NVRG) regular forces - mechanized chassis similar to those of Union,
+                        abnormally parallel for a <span class="tooltip-trigger"
+                            data-tooltip-text="Planets that that are known to Union, but have not yet recieved Core-world status. Communication between Union and Diasporan worlds may be limited by distance or Union's ability to administer to these planets to bring them in line with the Utopian Pillars.">Diasaporan</span>
+                        planet so far from other Union core-worlds; contracted mercenary companies (on-world and
+                        potentially off-world, equipped with Union-spec technology).</li>
+                    <li><span class="font-semibold text-teal-300">Ancillary Support:</span> LSA Forward Field
+                        Operators,
+                        and limited LSA artillery and strategic support units have been deployed outside of the
+                        Leandric
+                        States borders. Republic of Okasnia (ROKA) Mechanized Commando Forces are also operating on
+                        the
+                        fringes of their territory and may be able to provide support if need be.</li>
+                    <li><span class="font-semibold text-teal-300">Engagement Guidelines:</span> Prioritize capture
+                        of
+                        NVRG leadership. Disperse warlords/mercenaries peaceably if feasible, otherwise engage with
+                        Lancer discretion. Standard Union rules of engagement apply.</li>
+                    <li><span class="font-semibold text-teal-300">Logistical Support:</span> Limited GMS material
+                        and
+                        <span class="tooltip-trigger"
+                            data-tooltip-text="Advanced material printers that accept raw resources to fabricate a wide variety of complex products that would otherwise require dedicated factories to manufacture.">printer</span>
+                        support, subject to <span class="tooltip-trigger"
+                            data-tooltip-text="Union's Central Command, responsible for overarching military strategy and resource allocation.">Central
+                            Command</span> resource allocation based on threat escalation. A small scale printer and
+                        raw
+                        materiel has been allotted to the Lancer Forces for the purposes of minor repairs and
+                        munitions
+                        fabrication.
+                    </li>
+                    <li><span class="font-semibold text-teal-300">Expanded Powers:</span> The UNS-CV Rio Grande has
+                        been
+                        granted expanded military powers on Cressidium due to the NVRG threat and the continuation
+                        of
+                        anthrochauvinist doctrine.</li>
+                    <li><span class="font-semibold text-teal-300">Strategic Assets:</span> Both Atlas Silver and
+                        Juarez
+                        Blue have been granted hangar bays aboard the newly christened <span class="tooltip-trigger"
+                            data-tooltip-text="Union Nautical Vessel, Super Carrier class">UNV-SC</span>
+                        Valedictorian,
+                        a captured Vestan nuclear submersible carrier. Its facilities have been upgraded and
+                        converted
+                        for the use and transport of mech chassis as well as standard frame military vehicles. It
+                        has
+                        also been equipped with a <span class="tooltip-trigger"
+                            data-tooltip-text="A forked branch of the THALASSA-class NHP, SARGASSO-class NHPs exihbit a great deal in common with their progenitor codebase, but are specialized in Naval Combat and Logistics">SARGASSO-Class
+                            NHP</span>, derived from <span class="tooltip-trigger"
+                            data-tooltip-text="The THALASSA-class NHP of the UNS-CV Rio Grande, specializing in mid-sized ship-to-ship vacuum warfare and logistics">Rio's</span>
+                        codebase. From the Valedictorian both Atlas Silver and Juarez Blue will have close range
+                        tactical and strategic support, with the Rio Grande focused more on shoring up the defensive
+                        capabilities of the LSA and Okasnian forces.</li>
+                </ul>
+                <div class="mt-4">
+                    <img src="./images/UNV-SC_Valedictorian.png"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x300/111827/9CA3AF?text=Intel+Image+Unavailable';"
+                        alt="UNV-SC_Valedictorian"
+                        class="w-full rounded-lg border border-teal-700 shadow-lg max-w-md mx-auto modal-trigger-img"
+                        data-caption="The UNV-SC Valedictorian is a repurposed VSAF submersible supercarrier. It has two fully equipped mech bays, a hangar with room for three standard Marine-pattern drophawks, as well as a drone foundry for fielding remote controlled artillery and tanks. It has a crew complement of two hundred LSA and Union personnel, and is equipped with an integrated SARGASSO class NHP. There is an onboard Schedule-2 GMS Multi-function printer, with enough reserve material to service the needs to the two Lancer squadrons and maintain the drone assault forces in an expeditionary capacity. It acts as a mobile Omninet relay as well, with a direct connection to the UNS-CV Rio Grande in orbit for next-to-real-time comms." />
+                    <p style="text-align:center">The UNV-SC Valedictorian</p>
+                </div>
+            </section>
+        </main>
+        <main id="main-pilots" class="flex flex-wrap gap-6 justify-center w-full max-w-7xl mx-auto mb-6 hidden">
+            <section
+                class="mx-auto w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section bg-badge_juarez border-solid border-2 border-blue-700">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-blue-700 gap-5">
+                    <i class="fas fa-users mr-2"></i>Lancer Squadron: Juarez Blue (Primary)
+                </h2>
+                <div id="juarez-blue-roster" class="space-y-4 text-gray-300">
+                </div>
+            </section>
+
+            <section
+                class="mx-auto bg-badge_atlas w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] briefing-section border-solid border-2 border-gray-600">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-gray-600 gap-5">
+                    <i class="fas fa-user-friends mr-2"></i>Lancer Squadron: Atlas Silver (Support)
+                </h2>
+                <div id="atlas-silver-briefing-roster" class="space-y-4 text-gray-300">
+                </div>
+            </section>
+        </main>
+        <main id="main-opfor" class=" flex flex-wrap w-full max-w-7xl briefing-section mx-auto background-blur-sm mb-6 hidden border-solid border-2 border-red-700 pb-6">
+            <h2
+                class="mx-auto text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-red-700 gap-5 w-full">
+                <i class="fa-solid fa-magnifying-glass mr-2"></i></i>OpFor Anlysis
+            </h2>
+
+            <section class="w-full md:w-[calc(33%-0.75rem)] briefing-section mx-auto bg-badge_NVRG border-solid">
+                <div class="backdrop-blur-sm">
+                    <h3 class="text-xl"><i class="fa-solid fa-person-rifle mr-2"></i></i>
+                        New Vestan Revolutionary Guard Corps</h3>
+                    <div class="container p-6">
+                        <img class="modal-trigger-img" src="./images/NVRG-BACKGROUND.png">
+                        <p class="w-1/2">
+                            The New Vestan Revolutionary Guard is the reorganized remains of the former
+                            VSAF. Their
+                            force numbers are still not well understood, but in the aftermath of the purge
+                            of the
+                            progressive elements of the former VSAF, the consolidated forces seem to be
+                            largely
+                            composed of Vestan special forces and veteran corps.
+                        </p>
+                    </div>
+
+
+                    <p class="p-6">It is likely that the most senior elements of the Vestan military removed
+                        potentially
+                        problematic officers and elements prior to the coup, allowing for the orchestrators
+                        to grab
+                        the most advanced and powerful hardware the former VSAF had on standby. While their
+                        reduced
+                        numbers has limited their ability to occupy large swathes of territory, it has not
+                        reduced
+                        their offensive capabilities meaningfully.</p>
+                    <h3 class="text-lg">Tactical Profile</h3>
+                    <p class="p-6">The NVRG composition is a balanced mix of largely medium and light
+                        frames. Their
+                        role in this conflict is generalist, which has mandated that their fabrication
+                        supply chain
+                        has been largely focused on providing a strong frontline. While the former VSAF
+                        fielded a
+                        very wide variety of mechs, the current composition the NVRG are providing to the
+                        war effort
+                        are close-to-medium range, bolstered by a strong aerial contingent.</p>
+                </div>
+                <div class="container">
+                    <h3 class="text-lg italic">NVRG Livery</h3>
+                    <div class="trapezoid" style="background-color: #ff5e00;">
+                        <span>Primary</span>
+                    </div>
+                    <div class="trapezoid" style="background-color: #b91010;">
+                        <span>Secondary</span>
+                    </div>
+                    <div class="trapezoid" style="background-color: #171579;">
+                        <span>Tertiary</span>
+                    </div>
+                </div>
+            </section>
+            <section class="w-full md:w-[calc(33%-0.75rem)] briefing-section mx-auto bg-badge_BadSuns">
+                <div class="backdrop-blur-sm">
+                    <h3 class="text-xl"><i class="fa-solid fa-person-rifle mr-2"></i></i>
+                        The Bad Suns GmbH</h3>
+
+                    <div class="container p-6">
+                        <img class="modal-trigger-img" src="./images/BADSUNS-BACKGROUND.png">
+                        <p class="w-1/2">
+                            The Bad Suns is a mercenary company well known to Union. They have made a vast
+                            fortune
+                            by opposing Union expansion in the frontier worlds, allying with the Aun, the
+                            Karrakins
+                            and now the NVRG to stymie Union recontact endeavors in the outer rim.</p>
+                    </div>
+
+                    <p class="p-6">They are able to field several hundred mech chassis across their multiple
+                        theaters of
+                        operation, and their numbers on Cressidium are estimated to be somewhere between
+                        thirty and
+                        forty chassis, which indicates a significant investment by the company and a
+                        significant
+                        payout by the NVRG. Their equipment is well kept, and they utilize frames from
+                        smaller,
+                        local manufacturers, as well as some from more reputable and well known foundries
+                        under the
+                        Union umbrella. Though technically few in number, their capabilities should not be
+                        underestimated.
+                    </p>
+                    <h3 class="text-lg">Tactical Profile</h3>
+                    <p class="p-6">The Bad Suns field an extensive array of high powered, high quality
+                        chassis
+                        piloted by veterans of multiple conflicts. As a result, forces deployed by the Bad
+                        Suns tend
+                        to be smaller in number than either the NVRG or Rogue Planet contingents, but much
+                        higher in
+                        lethality per unit fielded. They are often times employed in mixed formations with
+                        both NVRG
+                        and Rogue Planet forces, though almost always in a commanderie or auxiliary
+                        capacity.</p>
+                </div>
+                <div class="container">
+                    <h3 class="text-lg italic">Bad Suns Livery</h3>
+                    <div class="trapezoid" style="background-color: #570505;">
+                        <span>Primary</span>
+                    </div>
+                    <div class="trapezoid" style="background-color: #09254b;">
+                        <span>Secondary</span>
+                    </div>
+                </div>
+            </section>
+            <section class="w-full md:w-[calc(33%-0.75rem)] briefing-section mx-auto bg-badge_RoguePlanet border-solid">
+                <div class="backdrop-blur-sm">
+                    <h3 class="text-xl"><i class="fa-solid fa-person-rifle mr-2"></i></i>
+                        Rogue Planet Corp</h3>
+                    <div class="container p-6">
+                        <img class="modal-trigger-img" src="./images/ROGUEPLANET-BACKGROUND.png">
+                        <p class="w-1/2">
+                            A relatively new contender in the privatized warfare sector, Rogue Planet
+                            operates on a much
+                            larger scale than most other mercenary companies. Rogue Planet fields great
+                            swathes of
+                            automated chaff units that form a vast frontline to protect backline officers
+                            and
+                            controllers. </p>
+                    </div>
+
+                    <p class="p-6">Their "flood the zone" strategy makes them an excellent battering ram and
+                        invasion force, their automated armies more than capable of following simple
+                        "Capture and
+                        Hold" directives. Where a hammer is needed, the Rogue Planet excels, but they
+                        are not entirely without precision. Their backline Command and Control detachments
+                        not only
+                        oversee the direction of their frontline forces, but also field cadres of capable
+                        electronic
+                        warfare units. When fielded behind their veritable body-shield of metal grunts,
+                        these
+                        specialists can be used like a scalpel, attacking both infrastructure and enemy
+                        systems to
+                        great effect.
+                    </p>
+                    <h3 class="text-lg">Tactical Profile</h3>
+                    <p class="p-6">Rogue Planet relies on raw quantity to form a frontline to protect their
+                        flesh
+                        and bones specialists on the back line. They are known for fielding above average
+                        amount of
+                        COMP/CON and remote piloted chassis - easily replaced and repaired after being
+                        disabled.
+                        Their backline is comprised of artillery, e-warfare specialists and long-range
+                        chassis,
+                        which make offensive manuevers safely from behind their shield of metal.</p>
+                </div>
+                <div class="container">
+                    <h3 class="text-lg italic">Rogue Planet Livery</h3>
+                    <div class="trapezoid" style="background-color: #ff8800;">
+                        <span>Primary</span>
+                    </div>
+                    <div class="trapezoid" style="background-color: #272727;">
+                        <span>Secondary</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <main id="main-assets" class=" flex flex-wrap w-full max-w-7xl briefing-section mx-auto background-blur-sm mb-6 hidden">
+            <section class="w-full briefing-section border-solid border-2 border-emerald-300">
+                <h2 class="text-2xl sm:text-3xl font-semibold  border-teal-600 p-4 mb-4 text-white bg-gradient-to-r to-transparent from-emerald-300 gap-5">
+                    <i class="fas fa-handshake mr-2"></i>Assets & Intel
+                </h2>
+                <div id="characterGrid" class="grid gap-4"></div>
+            </section>
+        </main>
+        <main id="main-commlog" class=" flex flex-wrap w-full max-w-7xl briefing-section mx-auto background-blur-sm mb-6">
+            <section class="w-full briefing-section hidden md:block border-solid border-2 border-emerald-300">
+                <div
+                    class="comms-log-module w-full bg-gray-900 text-gray-300 rounded-lg shadow-xl flex flex-col h-[60vh] md:h-[40vh] overflow-hidden border border-gray-700">
+                    <div>
+                        <h1>ATLAS SILVER // COMMUNICATIONS LOG</h1>
+                        <div id="communications-log">
+                            <p>System Initialized//++</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="imageModal" class="fixed inset-0 z-50 hidden flex items-center justify-center modal-overlay">
+        <div id="modalContentWrapper" class="relative bg-gray-900 rounded-lg overflow-hidden modal-content-wrapper">
+            <img id="modalImage" src="" alt="Modal Image" class="modal-image">
+
+            <div id="modalCaption" class="modal-caption"></div>
+
+            <button id="closeModal"
+                class="absolute top-2 right-2 text-gray-300 hover:text-white text-2xl font-bold leading-none focus:outline-none">&times;</button>
+        </div>
+    </div>
+    <footer class="mt-12 text-center text-gray-400 text-sm pb-8">
+        <p>END OF BRIEFING</p>
+        <p>PRIVILEGE OF UNION NAVAL COMMAND</p>
+        <p>FOR AUTHORIZED USE ONLY</p>
+        <div class="bg-gradient-to-r to-transparent from-white via-white mt-20"><img style="height:100px;" class="w-auto ml-10" src="./images/lancer.png"></div>
+    </footer>
+    </div>
+    <div></div>
+    <script src="./scripts/main.js" defer></script>
+    <script src="./scripts/comms-log.js" defer></script>
+</body>
+</html>
