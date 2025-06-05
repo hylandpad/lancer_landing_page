@@ -1,0 +1,721 @@
+@import "tailwindcss";
+
+body {
+    font-family: 'Monospace', monospace; 
+}
+.bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, #374151, #4B5563, #374151); 
+}
+.bg-repeat {
+    background-repeat: repeat; 
+}
+.bg-\[length\:600px_600px\] {
+    background-size: 600px 600px; 
+}
+/*.bg-\[url\(\"data\:image\/svg\+xml\,\%3Csvg xmlns\=\'http\:\/\/www\.w3\.org\/2000\/svg\' width\=\'4\' height\=\'6\' viewBox\=\'0 0 4 6\'\%3E\%3Cpath fill\=\'\%231F2937\' fill-opacity\=\'0\.5\' d\=\'M1 5h1v1H1V5zm2-3h1v1H3V2z\'\%3E\%3C\/path\%3E\%3C\/svg\%3E\"\)\] {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='6' viewBox='0 0 4 6'%3E%3Cpath fill='%231F2937' fill-opacity='0.5' d='M1 5h1v1H1V5zm2-3h1v1H3V2z'%3E%3C/path%3E%3C/svg%3E"); 
+}*/
+.bg-badge_juarez {
+    background-image: url(/images/juarez_blue_2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-blend-mode: overlay;
+}
+.bg-badge_atlas {
+    background-image: url(/images/atlas_silver.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-blend-mode: overlay;
+}
+
+.code-text-line::after {
+    content: '_'; 
+    animation: blink-animation 1s steps(5, start) infinite;
+    color: #a7f3d0; 
+}
+
+@keyframes blink-animation { 
+    to {
+        visibility: hidden;
+    }
+}
+#code-display {
+    background-color: rgba(0, 0, 0, 0.7); 
+}
+.progress-bar-instance {
+    width: 0%; 
+    height: 0.5rem; 
+    background-image: linear-gradient(to right,  hsl(180, 100%, 80%), hsl(180, 100%, 30%)); 
+    transition: width 0.1s linear; 
+    margin-top: 0.25rem; 
+}
+.code-line-container {
+    margin-bottom: 0.5rem; 
+    min-height: 2.5rem; 
+    overflow: hidden; 
+}
+
+body.min-h-screen.bg-gray-900.text-teal-400.font-mono { /* More specific selector for body if needed */
+    inset: 0; 
+    width: 100%; 
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px) !important; 
+    background-size: 70px 70px !important; 
+    overflow-y: scroll; 
+}
+main > section.briefing-section { /* Specific class for briefing sections */
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 1.5rem; 
+    border-radius: 0.5rem; 
+    position: relative; 
+}
+
+header { 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 0.75rem 1rem; 
+    transition: 
+        padding 0.3s ease,
+        justify-content 0.3s ease;
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+header.scrolled { 
+    padding: 0.25rem 1rem; 
+    justify-content: space-between;
+    z-index:999;
+}
+
+header h1 { 
+    transition: font-size 0.3s ease, text-align 0.3s ease; 
+    font-size: 2rem; 
+    margin-left: 0; 
+}
+
+header.scrolled h1 { 
+    font-size: 1.5rem; 
+    text-align: right; 
+}
+
+#menu-options {
+    position: absolute;
+    left: 80px;
+}
+
+#logo { 
+    width: 50px; 
+    height: 50px; 
+    margin-right: 1rem; 
+    border-radius: 0.25rem; 
+    display: none; 
+    background-image: url("http://thalassa.somethingwicked.cc/images/union_white.svg"); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0; 
+}
+
+header.scrolled #logo{ 
+    display: block;
+}
+
+header.scrolled #logo:hover{ 
+    rotate: -90deg;
+    transition: rotate .5s;
+    cursor: pointer;
+}
+
+#menu-options{
+    display: flex;
+    align-items: center
+}
+
+#menu-options span{
+    margin-right: .5rem;
+}
+
+.nav-icon{
+    width:45px;
+    height:auto;
+    display: inline;
+}
+
+
+#loading-overlay {
+    position: fixed;
+    inset: 0; 
+    background-color: rgba(17, 24, 39, 0.98); 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out; 
+    font-family: 'Monospace', monospace; 
+    color: #a7f3d0; 
+}
+
+#loading-logo {
+    width: 80px; 
+    height: 80px;
+    background-image: url("http://thalassa.somethingwicked.cc/images/union_white.svg"); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 0.25rem;
+    animation: spin 1.5s linear infinite; 
+    margin-top: 1rem; 
+    margin-bottom: 1rem; 
+}
+
+@keyframes spin { 
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden-initially { 
+    visibility: hidden;
+}
+
+#loading-text-initializing,
+#loading-text-verifying,
+#loading-text-authorized {
+    font-size: 1.125rem; 
+    margin-bottom: 0.5rem; 
+}
+#loading-text-authorized {
+    color: #6EE7B7; 
+    font-weight: bold;
+    display: none; 
+}
+#loading-text-verifying {
+     font-size: 0.875rem; 
+}
+
+.tooltip-trigger {
+    border-bottom: 1px dotted #a7f3d0; 
+    cursor: help; 
+}
+
+#page-tooltip {
+    position: absolute; 
+    background-color: rgba(17, 24, 39, 0.95); 
+    color: #e5e7eb; 
+    border: 1px solid #34D399; 
+    padding: 0.5rem 0.75rem; 
+    border-radius: 0.375rem; 
+    font-size: 0.875rem; 
+    line-height: 1.25rem;
+    z-index: 10000; 
+    visibility: hidden; 
+    opacity: 0; 
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; 
+    max-width: 250px; 
+    pointer-events: none; 
+}
+
+#page-tooltip.visible {
+    visibility: visible; 
+    opacity: 1; 
+}
+
+/* Combat Log Specific Styles */
+#combat-log-messages::-webkit-scrollbar { width: 6px; }
+#combat-log-messages::-webkit-scrollbar-track { background: #374151; border-radius: 10px; }
+#combat-log-messages::-webkit-scrollbar-thumb { background-color: #6b7280; border-radius: 10px; border: 1px solid #374151; }
+#combat-log-messages::-webkit-scrollbar-thumb:hover { background-color: #9ca3af; }
+.log-entry { margin-bottom: 0.5rem; line-height: 1.4; }
+.log-timestamp { color: #6b7280; margin-right: 0.5rem; font-size: 0.75rem; }
+.log-source-friendly { color: #34d399; font-weight: 600; }
+.log-source-hostile { color: #f87171; font-weight: 600; }
+.log-action { color: #facc15; }
+.log-target { color: #60a5fa; font-weight: 600; }
+.log-effect { color: #e5e7eb; }
+.log-critical { color: #fca5a5; font-weight: bold; text-transform: uppercase; }
+.log-info { color: #9ca3af; font-style: italic; }
+.log-damage { color: #fbbf24; font-weight: bold; }
+.log-pilot-exclamation { color: #c084fc; font-style: italic; margin-left: 0.5rem; }
+
+/* Sliding Overlay images for Pilot/Mech Section */
+  .frame {
+    border: 2px solid black;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .overlay-image-left {
+    position: absolute;
+    top: -40px;
+    left: 0; /* Image starts on top of the frame */
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    transition: left 0.5s ease-in-out;
+  }
+
+  .overlay-image-right {
+    position: absolute;
+    left: 300px;
+    top: -40px;
+    height: 300px;
+    width: 100%;
+    transition: left 0.5s ease-in-out;
+    color: darkslategray;
+  }
+
+  .overlay-image-right h2{
+    vertical-align: middle;
+    position: absolute;
+    top:15%;
+    left: 15%;
+    font-size: xxx-large;
+  }
+
+  .overlay-image-right h3{
+    vertical-align: middle;
+    position: absolute;
+    left: 15%;
+    top: 35%;
+    font-size: larger;
+  }
+
+  .frame:hover .overlay-image-left {
+    left: -100%; /* Slide image away to the left on hover */
+  }
+
+  .frame:hover .overlay-image-right {
+    left: 100%; /* Slide image away to the right on hover */
+  }
+
+.redacted {
+    color: transparent;
+    padding: 0.2em;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    background-color: black; /* Default background color */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Added color transition */
+    display:inline-block;
+}
+
+.redacted::before{
+    color:white;    
+    content:"// ++++ ADDITIONAL LEVEL 2 INTEL AUTHORIZATION CLEARED - HOVER FOR ACCESS ++++ //"
+}
+
+.redacted:hover {
+    background-color: transparent; /* Remove background on hover */
+    color: white;
+    display: initial;
+}
+
+.redacted:hover::before {
+    content:"";
+}
+
+.max-w-7xl {
+    max-width: 130rem !important; 
+}
+
+.comms-log-module h1 {
+    /* Tailwind classes for styling */
+    font-family: 'Courier New', Courier, monospace; /* Keep specific font */
+    /* Custom text-shadow for the glow effect */
+    text-shadow: 0 0 5px rgba(100, 245, 209, 0.7);
+}
+
+.comms-log-module #communications-log {
+    /* Tailwind classes for styling */
+    font-family: 'Courier New', Courier, monospace; /* Keep specific font */
+    transition: all 0.3s ease; /* Keep transition */
+    position: relative; /* Keep position */
+}
+
+.comms-log-module #communications-log:hover {
+        /* Keep custom hover styles */
+        border-color: #a7f9e3;
+        box-shadow: inset 0 0 10px rgba(100, 245, 209, 0.3);
+}
+
+.comms-log-module #communications-log p {
+    /* Tailwind class for margin */
+    opacity: 0; /* Keep animation property */
+    animation: fadeIn 0.5s forwards; /* Keep animation */
+    overflow: visible; /* Keep overflow */
+    width: auto; /* Keep width */
+    position: relative; /* Keep position */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.comms-log-module .compcon-text {
+    /* Tailwind classes for styling */
+    font-family: monospace; /* Keep specific font */
+}
+
+.comms-log-module .pilot-name {
+        font-weight: bold; /* Keep font-weight */
+        /* Color is set inline by JS */
+}
+
+.comms-log-module .reply-indicator {
+    /* Keep custom styles */
+    display: inline-block;
+    margin-right: 5px;
+    color: #64f5d1;
+    font-weight: normal;
+}
+
+/* Modal Viewer Styling */
+
+.modal-trigger-img {
+            cursor: pointer; /* Indicate it's clickable */
+            max-width: 200px; /* Example size for the trigger images */
+            height: auto;
+            border-radius: 8px; /* Rounded corners */
+            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.modal-trigger-img:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Custom styles for the modal overlay and content */
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay */
+}
+
+.modal-content-wrapper {
+    max-width: 90%; /* Max width of the modal content */
+    max-height: 90%; /* Max height of the modal content */
+    /* Add transition for properties that might change */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal-image {
+    max-width: 100%; /* Image should fit within its container */
+    max-height: 100%;
+    object-fit: contain; /* Ensure the entire image is visible */
+}
+
+.modal-caption {
+    /* Position the caption over the image */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background for readability */
+    padding: 8px;
+    color: #d1d5db; /* Light text color */
+    font-size: 0.9em;
+    border-bottom-left-radius: 8px; /* Match modal corner */
+    /* Optional: Add max-width if captions can be very long */
+    max-width: 100%;
+    word-wrap: break-word; /* Prevent overflow */
+}
+
+/* --- Animation Styles --- */
+
+/* Keyframes for the scale-in and fade-in animation */
+@keyframes scale-in-fade {
+    from {
+        transform: scale(0.8); /* Start slightly smaller */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: scale(1); /* End at normal size */
+        opacity: 1; /* End fully visible */
+    }
+}
+
+/* Apply the animation when the modal content wrapper has the 'is-active' class */
+.modal-content-wrapper.is-active {
+    animation: scale-in-fade 0.3s ease-out forwards; /* Apply the animation */
+}
+
+/* Ensure initial state for animation */
+/* When the modal is hidden, the content should be in the starting state */
+#imageModal.hidden .modal-content-wrapper {
+        transform: scale(0.8);
+        opacity: 0;
+}
+
+.bg-badge_NVRG{
+    background-image: url(/images/NVRG.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.bg-badge_BadSuns{
+    background-image: url(/images/BADSUNS.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: hard-light;
+}
+
+.bg-badge_RoguePlanet{
+    background-image: url(/images/ROGUEPLANET.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+ 
+.container {
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            max-width: 800px; /* Max width for better readability */
+            width: 100%;
+            /* Make the container a flexbox */
+            display: flex;
+            flex-direction: column; /* Default to column for small screens */
+            align-items: center; /* Center items in column layout */
+            gap: 1.5rem; /* Space between image and text */
+        }
+
+/* Responsive adjustments for larger screens (md breakpoint and up) */
+@media (min-width: 768px) { /* md breakpoint */
+    .container {
+        flex-direction: row; /* Change to row for larger screens */
+        align-items: flex-start; /* Align items to the start in row layout */
+        text-align: left;
+    }
+    .container img {
+        width: 50%; /* Image takes half width */
+        flex-shrink: 0; /* Prevent image from shrinking too much */
+    }
+    .container p {
+        width: 50%; /* Paragraph takes half width */
+        flex-grow: 1; /* Allow paragraph to grow and fill available space */
+    }
+}
+
+.trapezoid {
+    flex-grow: 1; /* Allow trapezoids to grow and fill space */
+    flex-basis: 0; /* Distribute space evenly */
+    height: 30px; /* Fixed height for the trapezoids */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    position: relative; /* Needed for z-index if overlapping */
+    border-radius: 0.5rem; /* Rounded corners for aesthetics */
+    overflow: hidden; /* Hide content that might spill due to skew */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    /* Generic skew styling applied to all .trapezoid elements */
+    transform: skewX(-10deg); /* Skew along the X-axis */
+    transform-origin: bottom left; /* Skew from the bottom left corner */
+}
+
+/* To counteract the skew on the text inside, apply inverse skew */
+.trapezoid span {
+    transform: skewX(10deg); /* Apply inverse skew to text */
+    display: block; /* Ensure span takes up space for transform */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 767px) {
+    .container {
+        flex-direction: column; /* Stack trapezoids vertically on small screens */
+    }
+    .trapezoid {
+        width: 100%; /* Full width when stacked */
+        transform: skewY(-5deg); /* Slightly different skew for vertical stacking */
+        transform-origin: top left;
+    }
+    .trapezoid span {
+        transform: skewY(5deg); /* Inverse skew for text */
+    }
+}
+
+@keyframes color-pulse {
+    0% {
+        color: rgb(74 222 128)
+    }
+    100% {
+        color: rgb(3, 252, 40)
+    }
+}
+
+/* Apply the animation to the pulsating-text class */
+.pulsating-text {
+    animation: color-pulse 1s infinite alternate ease-in-out;
+}
+
+/* Hologram frame */
+
+.hologram-frame {
+            position: relative;
+            /* Tailwind classes for width, height, rounded corners, padding, shadow, and border */
+            border: 3px solid rgba(0, 255, 255, 0.9); /* Thicker, brighter cyan border */
+            box-shadow: 0 0 40px rgba(0, 255, 255, 1); /* Even more prominent shadow */
+        }
+
+        .hologram-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Slightly dim and punchy image */
+            filter: brightness(0.6) contrast(1.4); /* More pronounced dimming/contrast */
+        }
+
+        /* Base hologram layers using pseudo-elements */
+        .hologram-frame::before,
+        .hologram-frame::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicks through to the image */
+            mix-blend-mode: screen; /* Blends colors nicely */
+            opacity: 0.4; /* Increased base opacity for more visibility */
+            animation: hologram-flicker 1.5s infinite alternate, scanlines 0.3s infinite steps(1); /* Faster base flicker */
+        }
+
+        .hologram-frame::before {
+            background: linear-gradient(
+                45deg,
+                rgba(0, 255, 255, 0.5), /* Cyan */
+                rgba(0, 200, 255, 0.5)  /* Lighter Blue */
+            );
+            filter: hue-rotate(0deg);
+            transform: translate(4px, 4px); /* Increased initial offset */
+        }
+
+        .hologram-frame::after {
+            background: linear-gradient(
+                -45deg,
+                rgba(0, 255, 255, 0.5), /* Cyan */
+                rgba(0, 255, 150, 0.5)    /* Greenish-Cyan */
+            );
+            filter: hue-rotate(180deg);
+            transform: translate(-4px, -4px); /* Increased initial offset */
+        }
+
+        /* Animations for subtle flicker and color shift - FURTHER AMPLIFIED */
+        @keyframes hologram-flicker {
+            0% {
+                opacity: 0.4;
+                filter: hue-rotate(0deg);
+                transform: translate(4px, 4px);
+            }
+            25% {
+                opacity: 0.55; /* More noticeable opacity change */
+                filter: hue-rotate(15deg); /* Smaller hue shift to stay in blue-green range */
+                transform: translate(-3px, 3px); /* Larger translation */
+            }
+            50% {
+                opacity: 0.35; /* More noticeable opacity change */
+                filter: hue-rotate(-10deg); /* Smaller hue shift to stay in blue-green range */
+                transform: translate(3px, -3px); /* Larger translation */
+            }
+            75% {
+                opacity: 0.5; /* More noticeable opacity change */
+                filter: hue-rotate(20deg); /* Smaller hue shift to stay in blue-green range */
+                transform: translate(-4px, -4px); /* Larger translation */
+            }
+            100% {
+                opacity: 0.4;
+                filter: hue-rotate(0deg);
+                transform: translate(4px, 4px);
+            }
+        }
+
+        /* Scanline effect */
+        @keyframes scanlines {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 100%;
+            }
+        }
+
+        .hologram-frame::before,
+        .hologram-frame::after {
+            background-size: 100% 9px; /* Even Thicker scanlines */
+            background-image: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 255, 0.3) 50%, /* Stronger scanline color */
+                rgba(0, 255, 255, 0.3) 60%,
+                transparent 60%
+            );
+        }
+
+        /* Glitch effect (triggered by JavaScript) - MAXIMIZED */
+        .hologram-frame.glitch::before,
+        .hologram-frame.glitch::after {
+            animation: glitch-shift 0.1s linear infinite; /* Even faster, more erratic */
+            filter: hue-rotate(var(--random-hue)); /* Use CSS variable for random hue */
+            opacity: 1; /* Full opacity during glitch */
+        }
+
+        @keyframes glitch-shift {
+            0% {
+                transform: translate(10px, 10px) scaleY(1); /* Max aggressive translation */
+                filter: hue-rotate(0deg);
+                clip-path: inset(0 0 0 0);
+            }
+            20% {
+                transform: translate(-10px, -10px) scaleY(1.2); /* Max aggressive translation and scale */
+                filter: hue-rotate(90deg); /* Adjusted hue shift for blue-green */
+                clip-path: inset(2% 0 88% 0); /* More pronounced tear */
+            }
+            40% {
+                transform: translate(20px, 0) scaleY(0.7); /* Max aggressive translation and scale */
+                filter: hue-rotate(180deg); /* Adjusted hue shift for blue-green */
+                clip-path: inset(20% 0 70% 0); /* More pronounced tear */
+            }
+            60% {
+                transform: translate(-20px, 0) scaleY(1.3); /* Max aggressive translation and scale */
+                filter: hue-rotate(270deg); /* Adjusted hue shift for blue-green */
+                clip-path: inset(40% 0 50% 0); /* More pronounced tear */
+            }
+            80% {
+                transform: translate(0, 10px) scaleY(0.75); /* Max aggressive translation and scale */
+                filter: hue-rotate(30deg); /* Adjusted hue shift for blue-green */
+                clip-path: inset(60% 0 30% 0); /* More pronounced tear */
+            }
+            100% {
+                transform: translate(10px, -10px) scaleY(1); /* Max aggressive translation */
+                filter: hue-rotate(0deg);
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+.slide-out-span {
+  display: inline-block; /* Or 'block' if you want it on its own line */
+  overflow: hidden;
+  max-width: 0;
+  white-space: nowrap; /* Prevents text wrapping during transition */
+  transition: max-width 0.5s ease-out; /* Adjust timing and easing as needed */
+  vertical-align: middle; /* Optional: helps align with adjacent inline elements */
+}
+
+.slide-out-span.visible {
+  max-width: 500px; /* Adjust to a value larger than the expected content width */
+} 
+
+#menu-options span:hover{
+    cursor: pointer;
+}
