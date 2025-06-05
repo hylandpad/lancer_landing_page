@@ -331,6 +331,12 @@ header.scrolled #logo:hover{
     text-shadow: 0 0 5px rgba(100, 245, 209, 0.7);
 }
 
+.comms-log-module #communications-logwrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
+}
+
 .comms-log-module #communications-log {
     /* Tailwind classes for styling */
     font-family: 'Courier New', Courier, monospace; /* Keep specific font */
